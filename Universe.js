@@ -1,7 +1,10 @@
 class Universe {
     #START_SIZE = 500;
     #OFFSET = 10;
-    
+    #MIN_QUAD_SIZE = 10;
+    #MAX_QUAD_SIZE = 150;
+    #CANVAS_MARGIN = 250;
+
     #canvasSize = -1;
     #universeSize = -1;
     #squaresCount = -1;
@@ -133,10 +136,10 @@ class Universe {
         this.#universeSize = this.#canvasSize  - this.#OFFSET * 2;
         this.#squaresCount = Math.pow(2, this.#Root.level);
         this.#SquareSize = Math.floor(this.#universeSize / this.#squaresCount);    
-        if (this.#SquareSize < 10) {
+        if (this.#SquareSize < this.#MIN_QUAD_SIZE) {
             this.#SetUniverseSize(this.#canvasSize*2);
             this.#CalculateSquareSize();
-        } else if (this.#SquareSize > 150) {            
+        } else if (this.#SquareSize > this.#MAX_QUAD_SIZE) {            
             this.#SetUniverseSize(Math.floor(this.#canvasSize/2));
             this.#CalculateSquareSize();
         }
@@ -167,7 +170,7 @@ class Universe {
     }
     #DrawGrid() {
         this.#Context.strokeStyle ='white';
-        this.#Context.lineWidth = 5;
+        this.#Context.lineWidth = this.#MIN_QUAD_SIZE/2;
         this.#Context.beginPath();
         for (let i = 0; i <= this.#squaresCount; i++) {
             this.#Context.moveTo(i * this.#SquareSize + this.#OFFSET, this.#OFFSET);
@@ -179,7 +182,10 @@ class Universe {
     }
 
     #OnClick(clientX, clientY) {
-        clientX -= 250;
+        const bodyScroll = document.body;
+        clientX += bodyScroll.scrollLeft;
+        clientY += bodyScroll.scrollTop;
+        clientX -= this.#CANVAS_MARGIN;
         if (this.#Root != null  &&  !this.#IsWorking &&
             clientX > this.#OFFSET && clientX < this.#SquareSize * this.#squaresCount + this.#OFFSET && 
             clientY > this.#OFFSET && clientY < this.#SquareSize * this.#squaresCount + this.#OFFSET) {
