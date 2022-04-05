@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>
+            HashLife
+        </title>
+        <link rel="stylesheet" href="canvas.css"/>
+        <script src="jquery-3.6.0.js"></script>
+        <script src="QuadTree.js"></script>
+        <script src="Universe.js"></script>
+        <script src="UniverseManager.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="sidebar">
+                <h2>
+                    Menu
+                </h2>
+                <div class="sidebar-line">
+                    <label for="level">
+                        Field size:
+                    </label>
+                    <div>
+                        <input id="level" type="range" min="2" max="10" step="1" value="2"/>
+                        <span id="levelView" />
+                    </div>
+                </div>
+                <div class="sidebar-line">
+                    <label for="speed">
+                        Animation speed:
+                    </label>
+                    <div>
+                        <input id="speed" type="range" min="1" max="8" step="1" value="2"/>
+                        <span id="speedView" />
+                    </div>
+                </div>
+                <div class="sidebar-line">
+                    <div>
+                        <label for="anim">
+                            Toogle animation:
+                        </label>
+                        <input id="anim" type="checkbox"/>
+                    </div>
+                </div>
+                <div class="sidebar-line buttons">
+                    <button id="start"> 
+                        Start
+                    </button>
+                    <button id="restart"> 
+                        Restart
+                    </button>
+                </div>
+            </div>           
+            <div class="canvas-handler">
+                <canvas id="universe" style="border: 1px solid"></canvas>
+            </div> 
+        </div>            
+    </body> 
+</html>
